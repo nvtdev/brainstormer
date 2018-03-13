@@ -1,0 +1,27 @@
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+  <header class="masthead mb-auto">
+    <div class="inner">
+      <h3 class="masthead-brand">Brainstormer</h3>
+    </div>
+  </header>
+
+  <h1 class="cover-heading">Pick a title for your brainstorming session</h1>
+  <main role="main" class="inner cover">
+    <form (submit)="onSessionSubmit()">
+      <p class="lead">
+        <input [(ngModel)]="sessionTitle" name="sessionTitle" type="text" class="form-control session-title" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+      </p>
+      <p class="lead">
+        <input type="submit" class="btn btn-lg btn-success" value="Get started">
+      </p>
+    </form>
+  </main>
+
+  <footer class="mastfoot mt-auto">
+    <div class="inner">
+      <p>Cover template for
+        <a href="https://getbootstrap.com/">Bootstrap</a>, by
+        <a href="https://twitter.com/mdo">@mdo</a>.</p>
+    </div>
+  </footer>
+</div>
