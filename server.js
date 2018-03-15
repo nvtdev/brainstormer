@@ -29,6 +29,9 @@ app.use(cors());
 const sessions = require("./routes/sessions");
 app.use("/sessions", sessions);
 
+const ideas = require("./routes/ideas");
+app.use("/ideas", ideas);
+
 app.get("/", (req, res) => {
   res.send("Invalid endpoint.");
 });

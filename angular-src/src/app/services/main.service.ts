@@ -13,4 +13,21 @@ export class MainService {
       .post("http://localhost:3000/sessions/start", { title }, { headers })
       .map(res => res.json());
   }
+
+  addIdea(idea) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    return this.http
+      .post("http://localhost:3000/ideas/add", { idea }, { headers })
+      .map(res => res.json());
+  }
+
+  getIdeas(sessionId) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("sessionId", sessionId);
+    return this.http
+      .get("http://localhost:3000/ideas/get", { headers: headers })
+      .map(res => res.json());
+  }
 }
