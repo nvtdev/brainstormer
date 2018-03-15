@@ -10,7 +10,7 @@ export class MainService {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
     return this.http
-      .post("http://localhost:3000/sessions/start", title, { headers: headers })
+      .post("http://localhost:3000/sessions/start", { title }, { headers })
       .map(res => res.json());
   }
 }

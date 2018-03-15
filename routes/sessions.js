@@ -1,16 +1,16 @@
 const express = require("express");
+const Session = require("../models/session");
 const router = express.Router();
 
 // Post
 router.post("/start", (req, res, next) => {
-  console.log(req);
   let newSession = new Session({
     title: req.body.title,
     state: "active",
     date: Date.now()
   });
 
-  Session.addStory(newSession, (err, session) => {
+  Session.addSession(newSession, (err, session) => {
     if (err) {
       console.log(err);
       res.json({

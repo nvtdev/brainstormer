@@ -1,0 +1,18 @@
+<div class="session-container">
+    <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+        <form (submit)="onIdeaSubmit()">
+          <div class="card-header">
+            <input type="text" class="form-control" [(ngModel)]="ideaTitle" name="ideaTitle"  placeholder="Pick a title for your idea...." aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          <div class="card-body">
+            <p class="card-text">
+                <textarea class="form-control" [(ngModel)]="ideaDescription" name="ideaDescription" aria-label="With textarea" placeholder="Add a short description.."></textarea>
+            </p>
+          </div>
+          <div class="card-footer">
+            <input type="text" class="form-control" [(ngModel)]="ideaUsername" name="ideaUsername" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            <button type="submit" class="btn btn-info">Submit</button>
+          </div>
+      </form>
+    </div>
+</div>

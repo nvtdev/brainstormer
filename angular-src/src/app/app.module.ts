@@ -8,11 +8,15 @@ import { AppComponent } from "./app.component";
 import { HomepageComponent } from "./components/homepage/homepage.component";
 
 import { MainService } from "./services/main.service";
+import { SessionComponent } from './components/session/session.component';
 
-const appRoutes: Routes = [{ path: "", component: HomepageComponent }];
+const appRoutes: Routes = [
+  { path: "", component: HomepageComponent },
+  {path:'session/:id', component: SessionComponent}
+];
 
 @NgModule({
-  declarations: [AppComponent, HomepageComponent],
+  declarations: [AppComponent, HomepageComponent, SessionComponent],
   imports: [
     BrowserModule,
     FormsModule,

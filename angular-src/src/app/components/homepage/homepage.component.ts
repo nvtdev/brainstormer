@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MainService } from "../../services/main.service";
+import {Router} from '@angular/router';
 
 @Component({
   selector: "app-homepage",
@@ -9,14 +10,16 @@ import { MainService } from "../../services/main.service";
 export class HomepageComponent implements OnInit {
   sessionTitle: string;
 
-  constructor(private mainService: MainService) {}
+  constructor(private mainService: MainService, private router:Router) {}
 
   ngOnInit() {}
 
   onSessionSubmit() {
     if (this.sessionTitle && this.sessionTitle != "") {
       this.mainService.startSession(this.sessionTitle).subscribe(response => {
-        console.log(response);
+        if (response.success) {
+          this.router.navigate(['session/' + response.session._id]);
+        }
       });
     }
   }
