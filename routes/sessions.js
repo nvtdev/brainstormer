@@ -26,4 +26,15 @@ router.post("/start", (req, res, next) => {
   });
 });
 
+router.get("/get", (req, res, next) => {
+  let sessionId = req.headers.sessionid;
+  Session.getById(sessionId, (err, session) => {
+    if (err) {
+      res.json({ success: false, msg: "Failed to load session." });
+    } else {
+      res.json({ success: true, session: session });
+    }
+  });
+});
+
 module.exports = router;

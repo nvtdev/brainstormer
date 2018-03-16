@@ -21,3 +21,7 @@ const Session = (module.exports = mongoose.model("Session", SessionSchema));
 module.exports.addSession = function(session, callback) {
   session.save(callback);
 };
+
+module.exports.getById = function(sessionId, callback) {
+  Session.findById(sessionId, callback);
+};

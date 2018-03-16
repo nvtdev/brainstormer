@@ -1,33 +1,39 @@
+<nav *ngIf="session" class="navbar navbar-dark bg-dark">
+  <p>{{session.title}}</p>
+</nav>
 <div class="session-container">
-    <div *ngFor="let idea of ideasForSession" class="card text-white bg-info mb-3" style="max-width: 18rem;">
-        <div class="card-header">
-          {{idea.title}} <span class="badge badge-light">{{idea.score}}</span>
-        </div>
-        <div class="card-body">
-          <p class="card-text">{{idea.description}}</p>
-        </div>
-        <div class="card-footer">
-            <div class="score-controls row">
-                <i class="fas fa-angle-up col-sm-3" (click)="addScore(idea._id, 'up')"></i>
-                <i class="fas fa-angle-down col-sm-3" (click)="addScore(idea._id, 'down')"></i>
-                <button class="btn btn-info col-sm-6">Comment</button>
-              </div>
-          </div>
-      </div>
-    <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-        <form (submit)="onIdeaSubmit()">
-          <div class="card-header">
-            <input type="text" class="form-control" [(ngModel)]="ideaTitle" name="ideaTitle"  placeholder="Pick a title for your idea...." aria-label="Username" aria-describedby="basic-addon1">
-          </div>
-          <div class="card-body">
-            <p class="card-text">
-                <textarea class="form-control" [(ngModel)]="ideaDescription" name="ideaDescription" aria-label="With textarea" placeholder="Add a short description.."></textarea>
-            </p>
-          </div>
-          <div class="card-footer">
-            <input type="text" class="form-control" [(ngModel)]="ideaUsername" name="ideaUsername" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-            <button type="submit" class="btn btn-info">Submit</button>
-          </div>
-      </form>
+  <div *ngFor="let idea of ideasForSession" class="card text-white mb-3" style="max-width: 18rem;" [ngStyle]="{'background-color': idea.color}">
+    <div class="card-header">
+      {{idea.title}}
+      <span class="badge badge-light">{{idea.score}}</span>
     </div>
+    <div class="card-body">
+      <p class="card-text">{{idea.description}}</p>
+    </div>
+    <div class="card-footer">
+      <div class="score-controls row">
+        <i class="fas fa-angle-up col-sm-3" (click)="addScore(idea._id, 'up')"></i>
+        <i class="fas fa-angle-down col-sm-3" (click)="addScore(idea._id, 'down')"></i>
+        <button class="btn btn-info col-sm-6">Comment</button>
+      </div>
+    </div>
+  </div>
+  <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+    <form (submit)="onIdeaSubmit()">
+      <div class="card-header">
+        <input type="text" class="form-control" [(ngModel)]="ideaTitle" name="ideaTitle" placeholder="Pick a title for your idea...."
+          aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <div class="card-body">
+        <p class="card-text">
+          <textarea class="form-control" [(ngModel)]="ideaDescription" name="ideaDescription" aria-label="With textarea" placeholder="Add a short description.."></textarea>
+        </p>
+      </div>
+      <div class="card-footer">
+        <input type="text" class="form-control" [(ngModel)]="ideaUsername" name="ideaUsername" placeholder="Username" aria-label="Username"
+          aria-describedby="basic-addon1">
+        <button type="submit" class="btn btn-info">Submit</button>
+      </div>
+    </form>
+  </div>
 </div>

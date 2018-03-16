@@ -1,33 +1,43 @@
 .session-container {
-    padding: 25px;
+  padding: 25px;
 }
 
-input, input:focus, textarea, textarea:focus {
-    border: none;
-    border-radius: 0px;
-    background: unset;
-    color: white;
+input,
+input:focus,
+textarea,
+textarea:focus {
+  border: none;
+  border-radius: 0px;
+  background: unset;
+  color: white;
 }
 
 .card-footer input {
-    width: 50%;
-    display: inline-block;
-    padding: 0px;
+  width: 50%;
+  display: inline-block;
+  padding: 0px;
 }
 
 .card {
-    display: inline-block;
-    float: left;
-    margin-right: 20px;
-    /* height: 250px;
+  display: inline-block;
+  float: left;
+  margin-right: 20px;
+  /* height: 250px;
     width: 250px; */
 }
 
 .score-controls .col-sm-4 {
-    padding: 0px;
+  padding: 0px;
 }
 
 .score-controls .fas {
-    padding-top: 10px;
-    cursor: pointer;
+  padding-top: 10px;
+  cursor: pointer;
+}
+
+.navbar p {
+  font-size: 22px;
+  font-weight: bold;
+  padding-top: 10px;
+  padding-left: 20px;
 }

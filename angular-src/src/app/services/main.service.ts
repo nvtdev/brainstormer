@@ -14,6 +14,15 @@ export class MainService {
       .map(res => res.json());
   }
 
+  getSession(sessionId) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("sessionid", sessionId);
+    return this.http
+      .get("http://localhost:3000/sessions/get", { headers })
+      .map(res => res.json());
+  }
+
   addIdea(idea) {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -33,11 +42,12 @@ export class MainService {
 
   addScore(sessionId, ideaId, direction) {
     let headers = new Headers(),
-        score = {
-          sessionId: sessionId,
-          ideaId: ideaId,
-          direction: direction
-        };
+      score = {
+        sessionId: sessionId,
+        ideaId: ideaId,
+        direction: direction
+      };
+    console.log(score);
     headers.append("Content-Type", "application/json");
     return this.http
       .post("http://localhost:3000/ideas/addScore", { score }, { headers })

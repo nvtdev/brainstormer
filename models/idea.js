@@ -27,12 +27,9 @@ const IdeaSchema = mongoose.Schema({
 const Idea = (module.exports = mongoose.model("Idea", IdeaSchema));
 
 module.exports.getBySessionId = function(sessionId, callback) {
-  Idea.find(
-    {
-      sessionId: sessionId
-    },
-    callback
-  ).sort( { score: -1 } );
+  Idea.find({ sessionId: sessionId })
+    .sort({ score: -1 })
+    .exec(callback);
 };
 
 module.exports.addIdea = function(idea, callback) {
@@ -40,22 +37,6 @@ module.exports.addIdea = function(idea, callback) {
   idea.save(callback);
 };
 
-module.exports.increaseScore = function(ideaId, callback) {
-//   Idea.update(
-//     { _id: ideaId },
-//     { $inc: { score: 1 } }
-//  );
-
-  Idea.findByIdAndUpdate(
-    ideaId,
-    { $inc: { score: 1 } },
-    callback
-  );
-};
-
-module.exports.decreaseScore = function(ideaId, callback) {
-  Idea.update(
-    { _id: ideaId },
-    { $inc: { score: -1 } }
- );
+module.exports.addScore = function(ideaId, value, callback) {
+  Idea.findByIdAndUpdate(ideaId, { $inc: { score: value } }, callback);
 };
