@@ -12,6 +12,7 @@ export class SessionComponent implements OnInit {
   ideaTitle: string;
   ideaDescription: string;
   ideaUsername: string;
+  ideasForSession: Array<Object>;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,6 +23,10 @@ export class SessionComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.sessionId = params["id"];
       console.log(this.sessionId);
+
+      this.mainService.getIdeas(this.sessionId).subscribe(response => {
+        this.ideasForSession = response.ideas;
+      });
     });
   }
 
@@ -36,5 +41,11 @@ export class SessionComponent implements OnInit {
     this.mainService.addIdea(idea).subscribe(response => {
       console.log(response);
     });
+  }
+
+  addScore(ideaId, direction) {
+    this.mainService.addScore(this.sessionId, ideaId, direction).subscribe(response => {
+      console.log(response);
+    })
   }
 }

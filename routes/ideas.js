@@ -38,15 +38,32 @@ router.post("/add", (req, res, next) => {
   });
 });
 
-router.get("/getBySessionId", (req, res, next) => {
-  let sessionId = req.headers.sessionId;
-  Idea.getBySessionId(username, (err, ideas) => {
+router.get("/get", (req, res, next) => {
+  let sessionId = req.headers.sessionid;
+  Idea.getBySessionId(sessionId, (err, ideas) => {
     if (err) {
       res.json({ success: false, msg: "Failed to load ideas." });
     } else {
       res.json({ success: true, ideas: ideas });
     }
   });
+});
+
+router.post("/addScore", (req, res, next) => {
+  const score = req.body.score;
+  if (score.direction == 'up')
+  {
+    Idea.increaseScore(score.ideaId, (err, res) => {
+      if (err) console.log(err);
+      if (res) {
+        Idea.getBySessionId(score.sessionId, (err, ideas) => {
+          console.log(err, ideas);
+          if (err) res.json({ success: false, msg: "Failed to load ideas." });
+          else res.json({ success: true, ideas: ideas });
+        });
+      }
+    });
+  }
 });
 
 module.exports = router;

@@ -1,4 +1,19 @@
 <div class="session-container">
+    <div *ngFor="let idea of ideasForSession" class="card text-white bg-info mb-3" style="max-width: 18rem;">
+        <div class="card-header">
+          {{idea.title}} <span class="badge badge-light">{{idea.score}}</span>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{idea.description}}</p>
+        </div>
+        <div class="card-footer">
+            <div class="score-controls row">
+                <i class="fas fa-angle-up col-sm-3" (click)="addScore(idea._id, 'up')"></i>
+                <i class="fas fa-angle-down col-sm-3" (click)="addScore(idea._id, 'down')"></i>
+                <button class="btn btn-info col-sm-6">Comment</button>
+              </div>
+          </div>
+      </div>
     <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
         <form (submit)="onIdeaSubmit()">
           <div class="card-header">
