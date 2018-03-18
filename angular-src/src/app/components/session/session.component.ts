@@ -12,8 +12,9 @@ export class SessionComponent implements OnInit {
   sessionId: number;
   ideaTitle: string;
   ideaDescription: string;
-  ideaUsername: string;
+  username: string;
   ideasForSession: Array<Object>;
+  comments: Array<Object>;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,42 +30,58 @@ export class SessionComponent implements OnInit {
       });
 
       this.mainService.getIdeas(this.sessionId).subscribe(response => {
-        let ideas = response.ideas;
+        this.ideasForSession = response.ideas;
+      });
 
-        for (let idea of ideas) idea.color = this.getRandomColor();
-
-        this.ideasForSession = ideas;
+      this.mainService.getComments(this.sessionId).subscribe(response => {
+        this.comments = response.comments;
       });
     });
   }
 
   onIdeaSubmit() {
+    if (!this.username || this.username == "") return;
+
     const idea = {
       title: this.ideaTitle,
       description: this.ideaDescription,
-      username: this.ideaUsername,
-      sessionId: this.sessionId
+      username: this.username,
+      sessionId: this.sessionId,
+      colour: this.getRandomColor()
     };
 
     this.mainService.addIdea(idea).subscribe(response => {
       if (response.success) {
         let lastIdea = response.ideas[response.ideas.length - 1];
-        lastIdea.color = this.getRandomColor();
+        // lastIdea.color = this.getRandomColor();
         this.ideasForSession.push(lastIdea);
       }
     });
   }
 
   addScore(ideaId, direction) {
+    let updatedIdeas = [];
     this.mainService
       .addScore(this.sessionId, ideaId, direction)
       .subscribe(response => {
-        console.log(response.ideas);
         let count = 0;
-        for (let idea of response.ideas) {
-          this.ideasForSession[count]["score"] = idea.score;
-          count++;
-        }
+        // for (let idea of response.ideas) {
+        //   for (let currentIdea of this.ideasForSession) {
+        //     if (currentIdea["_id"] == idea["_id"])
+        //       this.ideasForSession[count]["score"] = idea.score;
+        //   }
+        //   count++;
+        // }
+
+        // for (let currentIdea of this.ideasForSession) {
+        //   if (currentIdea["_id"] == response.idea._id) {
+        //     this.ideasForSession[count]["score"] = response.idea.score;
+        //   }
+        //   count++;
+        // }
+        // this.ideasForSession.sort(this.sortArray);
+
+        this.ideasForSession = response.ideas;
       });
   }
 
@@ -75,5 +92,32 @@ export class SessionComponent implements OnInit {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
+  }
+
+  getCommentsForIdea(ideaId) {
+    let comments = [];
+    for (let comment of this.comments) {
+      if (comment["ideaId"] == ideaId) comments.push(comment);
+    }
+    return comments;
+  }
+
+  onEnter(element, value, ideaId) {
+    // debugger;
+    // return;
+
+    if (value && value != "" && this.username && this.username != "") {
+      this.mainService
+        .addComment(value, ideaId, this.username, this.sessionId)
+        .subscribe(response => {
+          this.comments = response.comments;
+        });
+    }
+  }
+
+  sortArray(a, b) {
+    if (a.last_nom < b.last_nom) return -1;
+    if (a.last_nom > b.last_nom) return 1;
+    return 0;
   }
 }

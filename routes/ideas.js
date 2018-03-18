@@ -9,6 +9,7 @@ router.post("/add", (req, res, next) => {
     description: req.body.idea.description,
     username: req.body.idea.username,
     sessionId: req.body.idea.sessionId,
+    colour: req.body.idea.colour,
     score: 0
   });
 
@@ -58,7 +59,6 @@ router.post("/addScore", (req, res, next) => {
       Idea.getBySessionId(score.sessionId, (err, ideas) => {
         if (err) res.json({ success: false, msg: "Failed to load ideas." });
         else {
-          console.log("test");
           res.json({ success: true, ideas: ideas });
         }
       });

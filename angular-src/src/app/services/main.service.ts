@@ -47,10 +47,32 @@ export class MainService {
         ideaId: ideaId,
         direction: direction
       };
-    console.log(score);
     headers.append("Content-Type", "application/json");
     return this.http
       .post("http://localhost:3000/ideas/addScore", { score }, { headers })
+      .map(res => res.json());
+  }
+
+  addComment(text, ideaId, username, sessionId) {
+    let headers = new Headers(),
+      comment = {
+        sessionId: sessionId,
+        ideaId: ideaId,
+        text: text,
+        username: username
+      };
+    headers.append("Content-Type", "application/json");
+    return this.http
+      .post("http://localhost:3000/comments/add", { comment }, { headers })
+      .map(res => res.json());
+  }
+
+  getComments(sessionId) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("sessionid", sessionId);
+    return this.http
+      .get("http://localhost:3000/comments/get", { headers })
       .map(res => res.json());
   }
 }

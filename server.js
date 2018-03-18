@@ -32,6 +32,9 @@ app.use("/sessions", sessions);
 const ideas = require("./routes/ideas");
 app.use("/ideas", ideas);
 
+const comments = require("./routes/comments");
+app.use("/comments", comments);
+
 app.get("/", (req, res) => {
   res.send("Invalid endpoint.");
 });

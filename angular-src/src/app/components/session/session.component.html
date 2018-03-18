@@ -1,8 +1,10 @@
 <nav *ngIf="session" class="navbar navbar-dark bg-dark">
   <p>{{session.title}}</p>
+  <input type="text" class="navbar-username form-control" [(ngModel)]="username" name="username" placeholder="Pick a username in order to post ideas or comment..."
+    aria-label="Username" aria-describedby="basic-addon1">
 </nav>
 <div class="session-container">
-  <div *ngFor="let idea of ideasForSession" class="card text-white mb-3" style="max-width: 18rem;" [ngStyle]="{'background-color': idea.color}">
+  <div *ngFor="let idea of ideasForSession" class="card text-white mb-3" style="max-width: 18rem;" [ngStyle]="{'background-color': idea.colour}">
     <div class="card-header">
       {{idea.title}}
       <span class="badge badge-light">{{idea.score}}</span>
@@ -12,9 +14,17 @@
     </div>
     <div class="card-footer">
       <div class="score-controls row">
-        <i class="fas fa-angle-up col-sm-3" (click)="addScore(idea._id, 'up')"></i>
-        <i class="fas fa-angle-down col-sm-3" (click)="addScore(idea._id, 'down')"></i>
-        <button class="btn btn-info col-sm-6">Comment</button>
+        <i class="fas fa-angle-up col-sm-6" (click)="addScore(idea._id, 'up')"></i>
+        <i class="fas fa-angle-down col-sm-6" (click)="addScore(idea._id, 'down')"></i>
+      </div>
+      <div class="comments row">
+        <div *ngIf="comments" class="comments-container">
+          <div *ngFor="let comment of getCommentsForIdea(idea._id)">
+            <span class="comment-author">{{comment.username}}</span> {{comment.text}}
+          </div>
+        </div>
+        <input type="text" class="navbar-username form-control" placeholder="Add a comment" #comment aria-describedby="basic-addon1"
+          (keyup.enter)="onEnter(this, comment.value, idea._id)">
       </div>
     </div>
   </div>
@@ -30,8 +40,6 @@
         </p>
       </div>
       <div class="card-footer">
-        <input type="text" class="form-control" [(ngModel)]="ideaUsername" name="ideaUsername" placeholder="Username" aria-label="Username"
-          aria-describedby="basic-addon1">
         <button type="submit" class="btn btn-info">Submit</button>
       </div>
     </form>

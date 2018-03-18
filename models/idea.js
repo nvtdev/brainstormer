@@ -18,6 +18,10 @@ const IdeaSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  colour: {
+    type: String,
+    required: true
+  },
   score: {
     type: Number,
     required: true
@@ -30,6 +34,10 @@ module.exports.getBySessionId = function(sessionId, callback) {
   Idea.find({ sessionId: sessionId })
     .sort({ score: -1 })
     .exec(callback);
+};
+
+module.exports.getByIdeaId = function(ideaId, callback) {
+  Idea.findById(ideaId, callback);
 };
 
 module.exports.addIdea = function(idea, callback) {
