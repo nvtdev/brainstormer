@@ -1,7 +1,7 @@
 <nav *ngIf="session" class="navbar navbar-dark bg-dark">
   <p>{{session.title}}</p>
-  <input type="text" class="navbar-username form-control" [(ngModel)]="username" name="username" placeholder="Pick a username in order to post ideas or comment..."
-    aria-label="Username" aria-describedby="basic-addon1">
+  <input id="username" type="text" class="navbar-username form-control" [(ngModel)]="username" name="username" placeholder="Pick a username in order to post ideas or comment..."
+    aria-label="Username" aria-describedby="basic-addon1" (blur)="setUsername()">
 </nav>
 <div class="session-container">
   <div *ngFor="let idea of ideasForSession" class="card text-white mb-3" style="max-width: 18rem;" [ngStyle]="{'background-color': idea.colour}">

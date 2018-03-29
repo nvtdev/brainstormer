@@ -22,9 +22,12 @@ export class SessionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.username = '';
+    if (localStorage.getItem('brainstormer-username'))
+      this.username = localStorage.getItem('brainstormer-username');
+
     this.route.params.subscribe(params => {
       this.sessionId = params["id"];
-      console.log(this.sessionId);
       this.mainService.getSession(this.sessionId).subscribe(response => {
         this.session = response.session;
       });
@@ -37,6 +40,11 @@ export class SessionComponent implements OnInit {
         this.comments = response.comments;
       });
     });
+  }
+
+  setUsername() {
+    if (this.username != '')
+      localStorage.setItem('brainstormer-username', this.username);
   }
 
   onIdeaSubmit() {
