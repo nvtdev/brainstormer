@@ -37,4 +37,16 @@ router.get("/get", (req, res, next) => {
   });
 });
 
+router.get("/getRecentSessions", (req, res, next) => {
+  let sessionIds = req.headers.sessionids.split(',');
+  Session.getByCollectionOfIds(sessionIds, (err, sessions) => {
+    if (err) {
+      res.json({ success: false, msg: "Failed to load sessions." });
+    } else {
+      res.json({ success: true, sessions: sessions });
+    }
+  });
+
+});
+
 module.exports = router;

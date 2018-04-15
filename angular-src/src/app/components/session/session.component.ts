@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MainService } from "../../services/main.service";
 
 @Component({
@@ -9,7 +9,7 @@ import { MainService } from "../../services/main.service";
 })
 export class SessionComponent implements OnInit {
   session: Object;
-  sessionId: number;
+  sessionId: string;
   ideaTitle: string;
   ideaDescription: string;
   username: string;
@@ -18,19 +18,24 @@ export class SessionComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private mainService: MainService
   ) {}
 
   ngOnInit() {
     this.username = '';
-    if (localStorage.getItem('brainstormer-username'))
-      this.username = localStorage.getItem('brainstormer-username');
+    if (localStorage.getItem('username'))
+      this.username = localStorage.getItem('username');
+    else
+      this.username = 'Anonymous';
 
     this.route.params.subscribe(params => {
       this.sessionId = params["id"];
       this.mainService.getSession(this.sessionId).subscribe(response => {
         this.session = response.session;
       });
+
+      this.setSessionStorage();
 
       this.mainService.getIdeas(this.sessionId).subscribe(response => {
         this.ideasForSession = response.ideas;
@@ -42,9 +47,19 @@ export class SessionComponent implements OnInit {
     });
   }
 
+  setSessionStorage() {
+      let sessions = localStorage.getItem('sessions');
+      if (sessions) {
+        if (!sessions.includes(this.sessionId))
+          localStorage.setItem('sessions', sessions + ',' + this.sessionId);
+      } else
+        localStorage.setItem('sessions', this.sessionId);
+
+  }
+
   setUsername() {
     if (this.username != '')
-      localStorage.setItem('brainstormer-username', this.username);
+      localStorage.setItem('username', this.username);
   }
 
   onIdeaSubmit() {
@@ -127,5 +142,9 @@ export class SessionComponent implements OnInit {
     if (a.last_nom < b.last_nom) return -1;
     if (a.last_nom > b.last_nom) return 1;
     return 0;
+  }
+
+  goBack() {
+    this.router.navigate(['/']);
   }
 }

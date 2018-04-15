@@ -1,5 +1,8 @@
 <nav *ngIf="session" class="navbar navbar-dark bg-dark">
-  <p>{{session.title}}</p>
+  <div class="title-container">
+    <h3>{{session.title}}</h3>
+    <button type="button" class="btn btn-warning btn-back" (click)="goBack()">Back to homepage</button>
+  </div>
   <input id="username" type="text" class="navbar-username form-control" [(ngModel)]="username" name="username" placeholder="Pick a username in order to post ideas or comment..."
     aria-label="Username" aria-describedby="basic-addon1" (blur)="setUsername()">
 </nav>

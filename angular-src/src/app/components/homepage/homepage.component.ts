@@ -9,10 +9,19 @@ import {Router} from '@angular/router';
 })
 export class HomepageComponent implements OnInit {
   sessionTitle: string;
+  recentSessions: Array<Object>;
 
   constructor(private mainService: MainService, private router:Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    let sessionsIds = localStorage.getItem('sessions');
+    if (sessionsIds) {
+      this.mainService.getRecentSessions(sessionsIds).subscribe(response => {
+        console.log(response);
+        this.recentSessions = response.sessions;
+      });
+    }
+  }
 
   onSessionSubmit() {
     if (this.sessionTitle && this.sessionTitle != "") {

@@ -1,27 +1,38 @@
 <div class="homepage-container cover-container d-flex h-100 p-3 mx-auto flex-column">
   <header class="masthead mb-auto">
     <div class="inner">
-      <h3 class="masthead-brand">Title 1</h3>
+      <h1 class="masthead-brand site-title">Brainstormer</h1>
     </div>
   </header>
 
-  <h1 class="cover-heading">Pick a title</h1>
-  <main role="main" class="inner cover">
-    <form (submit)="onSessionSubmit()">
-      <p class="lead">
-        <input [(ngModel)]="sessionTitle" name="sessionTitle" type="text" class="form-control session-title" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
-      </p>
-      <p class="lead">
-        <input type="submit" class="btn btn-lg btn-success" value="Get started">
-      </p>
-    </form>
-  </main>
+  <div class="row">
+    <div class="col-sm-6">
+      <h3 class="cover-heading">Start a new session</h3>
+      <main role="main" class="inner cover">
+        <form (submit)="onSessionSubmit()">
+          <p class="lead">
+            <input placeholder="pick a title" [(ngModel)]="sessionTitle" name="sessionTitle" type="text" class="form-control session-title" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+          </p>
+          <p class="lead">
+            <input type="submit" class="btn btn-lg btn-success" value="Get started">
+          </p>
+        </form>
+      </main>
+    </div>
+    <div class="col-sm-6">
+      <h3 class="cover-heading">Recent sessions</h3>
+      <div *ngFor="let session of recentSessions" class="recent-session">
+        <a href="/session/{{session._id}}">{{session.title}}</a>
+      </div>
+    </div>
+  </div>
 
-  <footer class="mastfoot mt-auto">
+
+  <!-- <footer class="mastfoot mt-auto">
     <div class="inner">
       <p>Cover template for
         <a href="https://getbootstrap.com/">Bootstrap</a>, by
         <a href="https://twitter.com/mdo">@mdo</a>.</p>
     </div>
-  </footer>
+  </footer> -->
 </div>

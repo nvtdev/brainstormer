@@ -25,3 +25,11 @@ module.exports.addSession = function(session, callback) {
 module.exports.getById = function(sessionId, callback) {
   Session.findById(sessionId, callback);
 };
+
+module.exports.getByCollectionOfIds = function (ids, callback) {
+  Session.find({
+    _id : {
+      $in: ids
+    }
+  }, callback);
+}

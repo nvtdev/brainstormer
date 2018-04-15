@@ -23,6 +23,15 @@ export class MainService {
       .map(res => res.json());
   }
 
+  getRecentSessions(sessionIds) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("sessionIds", sessionIds);
+    return this.http
+      .get("http://localhost:3000/sessions/getRecentSessions", { headers })
+      .map(res => res.json());
+  }
+
   addIdea(idea) {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
