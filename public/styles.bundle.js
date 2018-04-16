@@ -3,7 +3,7 @@ webpackJsonp(["styles"],{
 /***/ "./node_modules/raw-loader/index.js!./node_modules/postcss-loader/lib/index.js??embedded!./src/styles.css":
 /***/ (function(module, exports) {
 
-module.exports = "\r\nhtml,\r\nbody {\r\n  /* height: 100%; */\r\n  background-color: #333;\r\n  color: #fff;\r\n}\r\n"
+module.exports = "\nhtml,\nbody {\n  /* height: 100%; */\n  background-color: #333;\n  color: #fff;\n}\n"
 
 /***/ }),
 
