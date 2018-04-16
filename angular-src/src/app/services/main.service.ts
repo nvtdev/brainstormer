@@ -10,7 +10,7 @@ export class MainService {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
     return this.http
-      .post("http://localhost:3000/sessions/start", { title }, { headers })
+      .post("sessions/start", { title }, { headers })
       .map(res => res.json());
   }
 
@@ -19,7 +19,7 @@ export class MainService {
     headers.append("Content-Type", "application/json");
     headers.append("sessionid", sessionId);
     return this.http
-      .get("http://localhost:3000/sessions/get", { headers })
+      .get("sessions/get", { headers })
       .map(res => res.json());
   }
 
@@ -28,7 +28,7 @@ export class MainService {
     headers.append("Content-Type", "application/json");
     headers.append("sessionIds", sessionIds);
     return this.http
-      .get("http://localhost:3000/sessions/getRecentSessions", { headers })
+      .get("sessions/getRecentSessions", { headers })
       .map(res => res.json());
   }
 
@@ -36,7 +36,7 @@ export class MainService {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
     return this.http
-      .post("http://localhost:3000/ideas/add", { idea }, { headers })
+      .post("ideas/add", { idea }, { headers })
       .map(res => res.json());
   }
 
@@ -45,7 +45,7 @@ export class MainService {
     headers.append("Content-Type", "application/json");
     headers.append("sessionid", sessionId);
     return this.http
-      .get("http://localhost:3000/ideas/get", { headers })
+      .get("ideas/get", { headers })
       .map(res => res.json());
   }
 
@@ -58,7 +58,7 @@ export class MainService {
       };
     headers.append("Content-Type", "application/json");
     return this.http
-      .post("http://localhost:3000/ideas/addScore", { score }, { headers })
+      .post("ideas/addScore", { score }, { headers })
       .map(res => res.json());
   }
 
@@ -72,7 +72,7 @@ export class MainService {
       };
     headers.append("Content-Type", "application/json");
     return this.http
-      .post("http://localhost:3000/comments/add", { comment }, { headers })
+      .post("comments/add", { comment }, { headers })
       .map(res => res.json());
   }
 
@@ -81,7 +81,7 @@ export class MainService {
     headers.append("Content-Type", "application/json");
     headers.append("sessionid", sessionId);
     return this.http
-      .get("http://localhost:3000/comments/get", { headers })
+      .get("comments/get", { headers })
       .map(res => res.json());
   }
 }
