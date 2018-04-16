@@ -20,6 +20,10 @@
       </main>
     </div>
     <div class="col-sm-6">
+      <h3 class="cover-heading">Example session</h3>
+      <div class="recent-session">
+        <a href="/session/5ad374160e020a08945c5a29">New app ideas</a>
+      </div>
       <h3 class="cover-heading">Recent sessions</h3>
       <div *ngFor="let session of recentSessions" class="recent-session">
         <a href="/session/{{session._id}}">{{session.title}}</a>
